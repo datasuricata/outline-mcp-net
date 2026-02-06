@@ -6,6 +6,21 @@ Documentação técnica da arquitetura e estrutura do projeto.
 
 Este projeto fornece um MCP Server que expõe ferramentas para interagir com o Outline, permitindo que agentes AI como Cursor e Claude Desktop gerenciem documentação automaticamente. A integração suporta criação, busca, atualização e listagem de documentos, além de geração automática de diagramas Mermaid.
 
+## Diagrama da Arquitetura do Sistema
+
+![Arquitetura do Sistema](../assets/system-architecture.png)
+
+A imagem acima ilustra a arquitetura completa do sistema, mostrando:
+
+- **Desenvolvedores**: Interagem com o sistema através do Cursor IDE e Chat com IA
+- **MCP Server (.NET)**: Servidor central que implementa:
+  - Cursor Rules para validação de padrões
+  - Guided Prompts para documentação de projeto e features
+  - MCP Tools para search, create e update
+- **Automação**: Sistema de revisões com geração automática via Mermaid
+- **Fonte de Verdade**: Outline Wiki (Open Source) com collections para Architecture, Standards, API Docs e Roadmaps
+- **HTTP API**: Comunicação entre o MCP Server e o Outline
+
 ## Componentes Principais
 
 ### 1. Outline.Mcp.Server

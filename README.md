@@ -13,6 +13,12 @@ MCP Server em C# que conecta Cursor/Claude Desktop ao Outline, permitindo que AI
 - Gerem diagramas Mermaid
 - Executem workflows guiados com guardrails anti-genérico
 
+## Arquitetura do Sistema
+
+![Arquitetura do Sistema](./assets/system-architecture.png)
+
+O diagrama acima ilustra como os componentes interagem: desenvolvedores usam o Cursor IDE que se comunica com o MCP Server (.NET), que aplica regras de validação e fornece ferramentas para gerenciar a documentação no Outline Wiki (fonte de verdade).
+
 ## Quick Start
 
 Escolha o método de instalação:
