@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schema.sourcegraph.com/mcp.schema.json",
+  "mcpServers": {
+    "outline-local": {
+      "description": "Outline MCP Server (Local/Stdio) - Executa via .NET SDK",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "C:\\absolute\\path\\to\\Outline\\src\\Outline.Mcp.Server\\Outline.Mcp.Server.csproj"
+      ],
+      "env": {
+        "OUTLINE_API_KEY": "ol_api_your_api_key_here",
+        "OUTLINE_BASE_URL": "http://localhost:3000"
+      }
+    }
+  }
+}

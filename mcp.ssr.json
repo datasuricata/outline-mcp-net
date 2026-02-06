@@ -1,0 +1,9 @@
+{
+  "$schema": "https://schema.sourcegraph.com/mcp.schema.json",
+  "mcpServers": {
+    "outline-remote": {
+      "description": "Outline MCP Server (Remote/SSE) - Conecta ao servidor Docker",
+      "url": "http://localhost:8080/sse"
+    }
+  }
+}

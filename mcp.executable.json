@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.sourcegraph.com/mcp.schema.json",
+  "mcpServers": {
+    "outline": {
+      "description": "Outline MCP Server (Self-Contained Executable)",
+      "command": "C:\\path\\to\\Outline\\publish\\win-x64\\Outline.Mcp.Server.exe",
+      "args": [],
+      "env": {
+        "OUTLINE_API_KEY": "ol_api_your_api_key_here",
+        "OUTLINE_BASE_URL": "http://localhost:3000"
+      }
+    }
+  }
+}

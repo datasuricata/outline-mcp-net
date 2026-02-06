@@ -1,0 +1,72 @@
+services:
+  outline-mcp-server:
+    build:
+      context: .
+      dockerfile: src/Outline.Mcp.Server/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - MCP_SSE_PORT=8080
+      - OUTLINE_BASE_URL=http://outline:3000
+      - OUTLINE_API_KEY=${OUTLINE_API_KEY}
+    depends_on:
+      outline:
+        condition: service_healthy
+    networks:
+      - outline-network
+
+  outline:
+    image: docker.getoutline.com/outlinewiki/outline:latest
+    env_file: ./.env
+    ports:
+      - "${EXPOSED_PORT:-3000}:3000"
+    volumes:
+      - ./storage:/var/lib/outline/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - outline-network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis:
+    image: redis
+    expose:
+      - "6379"
+    command: redis-server --protected-mode no
+    networks:
+      - outline-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+
+  postgres:
+    image: postgres:18
+    expose:
+      - "5432"
+    volumes:
+      - ./storage/postgres:/var/lib/postgresql/data
+    networks:
+      - outline-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "outline", "-U", "user"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'pass'
+      POSTGRES_DB: 'outline'
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+networks:
+  outline-network:
+    driver: bridge
